@@ -48,13 +48,13 @@ from aerial_gym.utils import task_registry
 
 def get_args():
     custom_parameters = [
-        {"name": "--task", "type": str, "default": "quad", "help": "Resume training or start testing from a checkpoint. Overrides config file if provided."},
+        {"name": "--task", "type": str, "default": "quad_with_obstacles", "help": "Resume training or start testing from a checkpoint. Overrides config file if provided."},
         {"name": "--experiment_name", "type": str, "default": os.path.basename(__file__).rstrip(".py"), "help": "Name of the experiment to run or load. Overrides config file if provided."},
         {"name": "--checkpoint", "type": str, "default": None, "help": "Saved model checkpoint number."},        
         {"name": "--headless", "action": "store_true", "default": False, "help": "Force display off at all times"},
         {"name": "--horovod", "action": "store_true", "default": False, "help": "Use horovod for multi-gpu training"},
         {"name": "--rl_device", "type": str, "default": "cuda:0", "help": 'Device used by the RL algorithm, (cpu, gpu, cuda:0, cuda:1 etc..)'},
-        {"name": "--num_envs", "type": int, "default": 512, "help": "Number of environments to create. Overrides config file if provided."},
+        {"name": "--num_envs", "type": int, "default": 1024, "help": "Number of environments to create. Overrides config file if provided."},
         {"name": "--seed", "type": int, "default": 1, "help": "Random seed. Overrides config file if provided."},
         {"name": "--play", "required": False, "help": "only run network", "action": 'store_true'},
 
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     print("using device:", device)
 
     # env setup
-    envs, env_cfg = task_registry.make_env(name="quad", args=args)
+    envs, env_cfg = task_registry.make_env(name="quad_with_obstacles", args=args)
 
     envs = RecordEpisodeStatisticsTorch(envs, device)
 

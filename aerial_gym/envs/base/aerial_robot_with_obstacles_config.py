@@ -132,7 +132,7 @@ class AerialRobotWithObstaclesCfg(BaseConfig):
       
 
     class tree_asset_params(asset_state_params):
-        num_assets = 10
+        num_assets = 1
 
         collision_mask = 1 # objects with the same collision mask will not collide
 
